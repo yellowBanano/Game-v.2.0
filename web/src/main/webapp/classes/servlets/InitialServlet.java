@@ -10,6 +10,7 @@ public class InitialServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("user", UserService.getInstance().getUser());
         req.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp")
                 .forward(req, resp);
     }
