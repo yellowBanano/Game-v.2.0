@@ -20,6 +20,6 @@ public class UserService {
     }
 
     public User getUser() {
-        return UserDao.getInstance().getUser();
+        return UserDao.getInstance().getUser(1L);
     }
 }
