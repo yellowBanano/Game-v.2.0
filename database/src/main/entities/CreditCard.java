@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,4 +30,12 @@ public class CreditCard extends Payment {
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = false)
     private User owner;
+
+    public CreditCard(LocalDateTime time, Wallet wallet, String serialNumber, String cvv, LocalDate expireDate, User owner) {
+        super(time, wallet);
+        this.serialNumber = serialNumber;
+        this.cvv = cvv;
+        this.expireDate = expireDate;
+        this.owner = owner;
+    }
 }

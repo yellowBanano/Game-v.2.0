@@ -1,27 +1,26 @@
 package entities_test;
 
-import entities.Discount;
+import entities.Type;
 import org.hibernate.Session;
 import org.junit.Test;
 import support_entities.SessionGetter;
 
-public class DiscountTest extends BaseTest {
-
+public class TypeTest extends BaseTest {
 
     @Test
-    public void testSaveDiscountToDb() {
+    public void testSaveTypeToDb() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        Discount discount = new Discount(20d);
-        session.save(discount);
+        Type shoes = new Type("shoes");
+        session.save(shoes);
 
         session.getTransaction().commit();
         session.close();
     }
 
     @Test
-    public void testGetDiscountFromDb() {
-        System.out.println(SessionGetter.getData(Discount.class, 1L));
+    public void testGetTypeFromDb() {
+        System.out.println(SessionGetter.getData(Type.class, 1L));
     }
 }

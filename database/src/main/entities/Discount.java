@@ -1,16 +1,12 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "discounts")
@@ -22,7 +18,7 @@ import java.util.HashSet;
 public class Discount extends BaseEntity {
 
     @OneToMany(mappedBy = "discount")
-    private HashSet<Product> products;
+    private Set<Product> products;
 
     @Column(name = "discount", nullable = false)
     private Double discount;

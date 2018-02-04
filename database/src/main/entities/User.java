@@ -48,7 +48,7 @@ public class User extends BaseEntity {
     private Set<Product> orderedProducts = new HashSet<>();
 
     @OneToMany(mappedBy = "owner")
-    private HashSet<CreditCard> cards;
+    private Set<CreditCard> cards;
 
     @Transient
     private String fullName = firstName + " " + lastName;

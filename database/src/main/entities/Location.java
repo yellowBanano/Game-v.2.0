@@ -1,9 +1,6 @@
 package entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,6 +9,7 @@ import javax.persistence.Embeddable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Location {
 
@@ -23,4 +21,6 @@ public class Location {
 
     @Column(name = "address")
     private String address;
+
+
 }

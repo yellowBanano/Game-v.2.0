@@ -22,4 +22,9 @@ public class Wallet extends BaseEntity {
 
     @OneToMany(mappedBy = "wallet")
     private Set<Payment> payments;
+
+    public Wallet(User user, Double amount) {
+        this.user = user;
+        this.amount = amount;
+    }
 }

@@ -8,7 +8,7 @@ import support_entities.SessionGetter;
 public class UserTest extends BaseTest {
 
     @Test
-    private void testSaveToDb() {
+    public void testSaveUserToDb() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
@@ -20,7 +20,7 @@ public class UserTest extends BaseTest {
     }
 
     @Test
-    private void testGetFromDb() {
+    public void testGetUserFromDb() {
         System.out.println(SessionGetter.getData(User.class, 1L));
     }
 }

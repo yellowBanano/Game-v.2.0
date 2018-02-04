@@ -1,27 +1,26 @@
 package entities_test;
 
-import entities.Discount;
+import entities.Material;
 import org.hibernate.Session;
 import org.junit.Test;
 import support_entities.SessionGetter;
 
-public class DiscountTest extends BaseTest {
-
+public class MaterialTest extends BaseTest {
 
     @Test
-    public void testSaveDiscountToDb() {
+    public void testSaveMaterialToDb() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        Discount discount = new Discount(20d);
-        session.save(discount);
+        Material material = new Material("name");
+        session.save(material);
 
         session.getTransaction().commit();
         session.close();
     }
 
     @Test
-    public void testGetDiscountFromDb() {
-        System.out.println(SessionGetter.getData(Discount.class, 1L));
+    public void testGetMaterialFromDb() {
+        System.out.println(SessionGetter.getData(Material.class, 1L));
     }
 }

@@ -23,4 +23,8 @@ public class Type extends BaseEntity {
 
     @ManyToMany(mappedBy = "types")
     private Set<Product> products = new HashSet<>();
+
+    public Type(String name) {
+        this.name = name;
+    }
 }
