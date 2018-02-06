@@ -1,29 +1,34 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
   "-//Hibernate/Hibernate Configuration DTD//EN"
-  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.driver_class">org.h2.Driver</property>
-    <property name="dialect">org.hibernate.dialect.H2Dialect</property>
-    <property name="connection.url">jdbc:h2:mem:web_shop</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password"/>
-    <property name="hbm2ddl.auto">create-drop</property>
-    <property name="show_sql">true</property>
-    <property name="format_sql">true</property>
+    <!--<property name="connection.driver_class">org.h2.Driver</property>-->
+    <!--<property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
+    <!--<property name="connection.url">jdbc:h2:mem:web_shop</property>-->
+    <!--<property name="connection.username">root</property>-->
+    <!--<property name="connection.password"/>-->
+    <!--<property name="hbm2ddl.auto">create-drop</property>-->
+    <!--<property name="show_sql">true</property>-->
+    <!--<property name="format_sql">true</property>-->
 
-    <mapping class="entities.User"/>
-    <mapping class="entities.Type"/>
-    <mapping class="entities.Product"/>
-    <mapping class="entities.Image"/>
-    <mapping class="entities.Material"/>
-    <mapping class="entities.Shop"/>
-    <mapping class="entities.Discount"/>
-    <mapping class="entities.Order"/>
-    <mapping class="entities.Location"/>
-    <mapping class="entities.Wallet"/>
-    <mapping class="entities.Payment"/>
-    <mapping class="entities.CreditCard"/>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/web_shop</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">root</property>
+
+    <mapping class="by.myself.entities.User"/>
+    <mapping class="by.myself.entities.Type"/>
+    <mapping class="by.myself.entities.Product"/>
+    <mapping class="by.myself.entities.Image"/>
+    <mapping class="by.myself.entities.Material"/>
+    <mapping class="by.myself.entities.Shop"/>
+    <mapping class="by.myself.entities.Discount"/>
+    <mapping class="by.myself.entities.Order"/>
+    <mapping class="by.myself.entities.Wallet"/>
+    <mapping class="by.myself.entities.Payment"/>
+    <mapping class="by.myself.entities.CreditCard"/>
   </session-factory>
 </hibernate-configuration>

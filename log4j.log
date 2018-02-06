@@ -1,2 +1,0 @@
-org.hibernate.boot.jaxb.internal.stax.LocalXmlResourceResolver 2018-01-27 14:02:03,378 WARN  - HHH90000012: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/hibernate-configuration. Use namespace http://www.hibernate.org/dtd/hibernate-configuration instead.  Support for obsolete DTD/XSD namespaces may be removed at any time.
-org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl 2018-01-27 14:02:03,628 WARN  - HHH10001002: Using Hibernate built-in connection pool (not for production use!)

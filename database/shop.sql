@@ -47,7 +47,7 @@ create table orders (
 	datetime_order DATETIME NOT NULL,
   paid BIT NOT NULL,
   delivered BIT NOT NULL,
-	PRIMARY KEY(id, id_product, id_consumer),
+	PRIMARY KEY(id),
 	FOREIGN KEY(id_product) REFERENCES products(id),
 	FOREIGN KEY(id_consumer) REFERENCES users(id));
 create table users (
@@ -77,7 +77,6 @@ CREATE TABLE payments (
 );
 CREATE TABLE credit_cards (
 	id BIGINT AUTO_INCREMENT,
-	id_user BIGINT NOT NULL,
 	id_payment BIGINT NOT NULL UNIQUE,
 	serial_number VARCHAR(50) NOT NULL UNIQUE,
 	cvv VARCHAR(10) NOT NULL,
