@@ -1,7 +1,6 @@
 package by.myself;
 
 import by.myself.dao.UserDao;
-import by.myself.entities.User;
 
 public class UserService {
 
@@ -9,7 +8,7 @@ public class UserService {
 
     public static UserService getInstance() {
         if (INSTANCE == null) {
-            synchronized (UserDao.class) {
+            synchronized (UserService.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new UserService();
                 }
@@ -21,7 +20,7 @@ public class UserService {
     private UserService() {
     }
 
-    public User getUser() {
-        return UserDao.getInstance().getUser(1L);
+    public UserDao getUserDao() {
+        return UserDao.getInstance();
     }
 }

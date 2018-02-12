@@ -2,7 +2,14 @@ package by.myself.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +19,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class User extends BaseEntity {
 
     @Column(name = "email", unique = true, nullable = false)
@@ -50,21 +58,5 @@ public class User extends BaseEntity {
         this.login = login;
         this.password = password;
         this.wallet = wallet;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", location=" + location +
-                ", orders=" + orders +
-                ", fullName='" + fullName + '\'' +
-                ", id_wallet='" + wallet.getId() + '\'' +
-                '}';
     }
 }

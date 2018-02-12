@@ -2,7 +2,15 @@ package by.myself.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +20,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Product extends BaseEntity {
 
     @Column(name = "name", nullable = false)
@@ -67,16 +76,10 @@ public class Product extends BaseEntity {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", cost=" + cost +
-                ", producer='" + producer + '\'' +
-                ", provider='" + provider + '\'' +
-                ", size=" + size +
-                ", amount=" + amount +
-                ", id_image=" + image.getId() +
-                '}';
+    public Product(String name, Double cost, Integer size, Integer amount) {
+        this.name = name;
+        this.cost = cost;
+        this.size = size;
+        this.amount = amount;
     }
 }

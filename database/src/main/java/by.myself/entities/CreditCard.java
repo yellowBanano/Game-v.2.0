@@ -5,7 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "credit_cards")
+@ToString
 @PrimaryKeyJoinColumn(name = "id_payment")
 public class CreditCard extends Payment {
 
@@ -31,18 +35,5 @@ public class CreditCard extends Payment {
         this.serialNumber = serialNumber;
         this.cvv = cvv;
         this.expireDate = expireDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "time=" + super.getTime() +
-                ", wallet=" + super.getWallet().getId() +
-                '}' +
-                " CreditCard{" +
-                "serialNumber='" + serialNumber + '\'' +
-                ", cvv='" + cvv + '\'' +
-                ", expireDate=" + expireDate +
-                '}';
     }
 }

@@ -2,7 +2,13 @@ package by.myself.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,6 +17,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Payment extends BaseEntity {
 
@@ -20,12 +27,4 @@ public abstract class Payment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "id_wallet", nullable = false)
     private Wallet wallet;
-
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "time=" + time +
-                ", wallet=" + wallet.getId() +
-                '}';
-    }
 }

@@ -2,7 +2,11 @@ package by.myself.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Order extends BaseEntity {
 
     @ManyToOne
@@ -29,15 +34,4 @@ public class Order extends BaseEntity {
 
     @Column(name = "delivered", nullable = false)
     private boolean delivered;
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "consumer=" + consumer.getId() +
-                ", product=" + product.getId() +
-                ", dateTime=" + dateTime +
-                ", paid=" + paid +
-                ", delivered=" + delivered +
-                '}';
-    }
 }
