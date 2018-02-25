@@ -1,11 +1,6 @@
 package by.myself.dao;
 
 import by.myself.entities.Discount;
-import by.myself.entities.QDiscount;
-import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
-
-import java.util.List;
 
 public class DiscountDao extends BaseDao<Discount> {
 
@@ -26,21 +21,7 @@ public class DiscountDao extends BaseDao<Discount> {
     }
 
     @Override
-    public List<Discount> findAll(Session session) {
-        JPAQuery<Discount> query = new JPAQuery<>(session);
-        QDiscount discount = QDiscount.discount1;
-        query.select(discount)
-                .from(discount);
-        return query.fetchResults().getResults();
-    }
-
-    @Override
-    public Discount findById(Session session, Long id) {
-        JPAQuery<Discount> query = new JPAQuery<>(session);
-        QDiscount discount = QDiscount.discount1;
-        query.select(discount)
-                .from(discount)
-                .where(discount.id.eq(id));
-        return query.fetchOne();
+    protected Class<Discount> getEntityClass() {
+        return Discount.class;
     }
 }

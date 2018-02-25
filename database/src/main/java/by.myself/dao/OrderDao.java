@@ -1,11 +1,6 @@
 package by.myself.dao;
 
 import by.myself.entities.Order;
-import by.myself.entities.QOrder;
-import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
-
-import java.util.List;
 
 public class OrderDao extends BaseDao<Order> {
 
@@ -26,21 +21,7 @@ public class OrderDao extends BaseDao<Order> {
     }
 
     @Override
-    public List<Order> findAll(Session session) {
-        JPAQuery<Order> query = new JPAQuery<>(session);
-        QOrder order = QOrder.order;
-        query.select(order)
-                .from(order);
-        return query.fetchResults().getResults();
-    }
-
-    @Override
-    public Order findById(Session session, Long id) {
-        JPAQuery<Order> query = new JPAQuery<>(session);
-        QOrder order = QOrder.order;
-        query.select(order)
-                .from(order)
-                .where(order.id.eq(id));
-        return query.fetchOne();
+    protected Class<Order> getEntityClass() {
+        return Order.class;
     }
 }

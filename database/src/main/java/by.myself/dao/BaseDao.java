@@ -6,28 +6,40 @@ import java.util.List;
 
 public abstract class BaseDao<T> {
 
-    public  boolean save(Session session, T t) {
+    public void save(Session session, T t) {
         session.beginTransaction();
         session.save(t);
         session.getTransaction().commit();
-        return true;
     }
 
-    public  boolean update(Session session, T t) {
+    public void update(Session session, T t) {
         session.beginTransaction();
         session.update(t);
         session.getTransaction().commit();
-        return true;
     }
 
-    public  boolean delete(Session session, T t) {
+    public void delete(Session session, T t) {
         session.beginTransaction();
         session.delete(t);
         session.getTransaction().commit();
-        return true;
     }
 
-    public abstract List<T> findAll(Session session);
+    public List<T> findAll(Session session) {
+        session.beginTransaction();
+        List<T> resultList = session.createQuery("select e from " + getEntityClass().getSimpleName() + " e", getEntityClass())
+                .getResultList();
+        session.getTransaction().commit();
+        return resultList;
+    }
 
-    public abstract T findById(Session session, Long id);
+    public T findById(Session session, Long id) {
+        session.beginTransaction();
+        List<T> resultList = session.createQuery("select e from " + getEntityClass().getSimpleName() + " e where e.id = " + id, getEntityClass())
+                .getResultList();
+        session.getTransaction().commit();
+        return resultList.isEmpty() ? null : resultList.get(0);
+    }
+
+    protected abstract Class<T> getEntityClass();
+
 }

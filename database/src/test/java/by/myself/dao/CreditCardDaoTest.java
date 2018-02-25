@@ -29,7 +29,7 @@ public class CreditCardDaoTest extends BaseTest {
     public void findByIdPayment() {
         Session session = SESSION_FACTORY.openSession();
 
-        CreditCardDao.getInstance().findById(session, 1L);
+        CreditCardDao.getInstance().findById(session, 3L);
 
         session.close();
     }

@@ -8,7 +8,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class ProductDao extends BaseDao<Product> {
+public class  ProductDao extends BaseDao<Product> {
 
     private static ProductDao INSTANCE;
 
@@ -26,25 +26,6 @@ public class ProductDao extends BaseDao<Product> {
     private ProductDao() {
     }
 
-    @Override
-    public List<Product> findAll(Session session) {
-        JPAQuery<Product> query = new JPAQuery<>(session);
-        QProduct product = QProduct.product;
-        query.select(product)
-                .from(product);
-        return query.fetchResults().getResults();
-    }
-
-    @Override
-    public Product findById(Session session, Long id) {
-        JPAQuery<Product> query = new JPAQuery<>();
-        QProduct product = QProduct.product;
-        query.select(product)
-                .from(product)
-                .where(product.id.eq(id));
-        return query.fetchOne();
-    }
-
     public List<Product> searchProducts(Session session, String userQuery, int limit, int offset, Sort typeOfSorting) {
         JPAQuery<Product> query = new JPAQuery<>();
         QProduct product = QProduct.product;
@@ -52,7 +33,8 @@ public class ProductDao extends BaseDao<Product> {
                 .from(product)
                 .where(product.name.containsIgnoreCase(userQuery)
                         .or(product.producer.containsIgnoreCase(userQuery))
-                        .or(product.cost.eq(Double.valueOf(userQuery))))
+//                        .or(product.cost.eq(Double.valueOf(userQuery)))
+                )
                 .limit(limit)
                 .offset(offset);
 
@@ -69,5 +51,10 @@ public class ProductDao extends BaseDao<Product> {
         }
 
         return query.fetchResults().getResults();
+    }
+
+    @Override
+    protected Class<Product> getEntityClass() {
+        return Product.class;
     }
 }

@@ -7,10 +7,9 @@
 <body>
 <form>
     <p>
-        <input type="text" name="user-query" placeholder="Поиск по сайту">
-        Ограничить количество результатов <input type="number" name="limit" value="0">
-        Пропустить первые <input type="number" name="offset" value="0"> результатов
-        Количество результатов на странице
+        <input type="text" name="user-query" placeholder="Поиск по сайту"><br>
+        Ограничить количество результатов <input type="number" name="limit" value="0"><br>
+        Пропустить первые <input type="number" name="offset" value="0"> результатов<br>
     </p>
     Сортировка
     <p>
@@ -36,7 +35,7 @@
         <input name="pagination" type="radio" value="50" checked>
     </label> 50</p>
     </p>
-    <input type="submit" value="Найти">
+    <input type="submit" value="Найти"><br>
 
     <table border="1" cellpadding="5" cellspacing="5">
         <tr>

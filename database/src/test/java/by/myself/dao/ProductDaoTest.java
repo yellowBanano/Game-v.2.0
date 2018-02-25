@@ -6,6 +6,8 @@ import by.myself.utils.entities.Sort;
 import org.hibernate.Session;
 import org.junit.Test;
 
+import java.util.List;
+
 public class ProductDaoTest extends BaseTest {
 
     @Test
@@ -57,7 +59,7 @@ public class ProductDaoTest extends BaseTest {
     public void searchProducts() {
         Session session = SESSION_FACTORY.openSession();
 
-        ProductDao.getInstance().searchProducts(session, "50", 10, 0, Sort.NAMEASC);
+        ProductDao.getInstance().searchProducts(session, "Me", 10, 0, Sort.NAMEASC);
 
         session.close();
     }
