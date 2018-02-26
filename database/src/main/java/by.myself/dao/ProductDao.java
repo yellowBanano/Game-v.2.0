@@ -27,7 +27,7 @@ public class  ProductDao extends BaseDao<Product> {
     }
 
     public List<Product> searchProducts(Session session, String userQuery, int limit, int offset, Sort typeOfSorting) {
-        JPAQuery<Product> query = new JPAQuery<>();
+        JPAQuery<Product> query = new JPAQuery<>(session);
         QProduct product = QProduct.product;
         query.select(product)
                 .from(product)
