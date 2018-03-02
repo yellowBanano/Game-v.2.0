@@ -1,5 +1,6 @@
 CREATE DATABASE web_shop;
 USE web_shop;
+# DROP DATABASE web_shop;
 
 # MAIN TABLES
 CREATE TABLE wallets (
@@ -33,26 +34,24 @@ CREATE TABLE types (
   name VARCHAR(30),
   PRIMARY KEY (id)
 );
-CREATE TABLE products (
+CREATE TABLE discounts (
   id       BIGINT AUTO_INCREMENT,
-  id_type  BIGINT,
-  id_image BIGINT,
-  name     VARCHAR(30) NOT NULL,
-  cost     DECIMAL     NOT NULL,
-  producer VARCHAR(20),
-  provider VARCHAR(20),
-  size     INT         NOT NULL,
-  amount   INT,
+  discount DECIMAL NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE products (
+  id          BIGINT AUTO_INCREMENT,
+  id_image    BIGINT,
+  id_discount BIGINT,
+  name        VARCHAR(30) NOT NULL,
+  cost        DECIMAL     NOT NULL,
+  producer    VARCHAR(20),
+  provider    VARCHAR(20),
+  size        INT         NOT NULL,
+  amount      INT,
   PRIMARY KEY (id),
   FOREIGN KEY (id_image) REFERENCES images (id),
-  FOREIGN KEY (id_type) REFERENCES types (id)
-);
-CREATE TABLE discounts (
-  id         BIGINT AUTO_INCREMENT,
-  id_product BIGINT,
-  discount   DECIMAL NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (id_product) REFERENCES products (id)
+  FOREIGN KEY (id_discount) REFERENCES discounts (id)
 );
 CREATE TABLE materials (
   id   BIGINT AUTO_INCREMENT,
@@ -71,7 +70,8 @@ CREATE TABLE users (
   country      VARCHAR(30),
   city         VARCHAR(30),
   address      VARCHAR(30),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_wallet) REFERENCES wallets (id)
 );
 CREATE TABLE orders (
   id             BIGINT AUTO_INCREMENT,
@@ -109,8 +109,6 @@ CREATE TABLE product_type (
   FOREIGN KEY (id_type) REFERENCES types (id)
 );
 
-# DROP DATABASE web_shop;
-
 INSERT INTO wallets (id, amount) VALUES ('1', '20');
 
 INSERT INTO payments (id, id_wallet, time) VALUES ('1', '1', '2000-11-10 10:20:10');
@@ -122,10 +120,14 @@ INSERT INTO images (id, link) VALUES ('1', 'someLink');
 
 INSERT INTO types (id, name) VALUES ('1', 'someName');
 
-INSERT INTO products (id, id_type, id_image, name, cost, producer, provider, size, amount)
-VALUES ('1', '1', '1', 'someName', '10', 'someProducer', 'someProvider', '40', '8');
+INSERT INTO discounts (id, discount) VALUES ('1', '20');
 
-INSERT INTO discounts (id, id_product, discount) VALUES ('1', '1', '20');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('1', NULL, NULL, 'someName2', '10', 'someProducer1', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('2', NULL, NULL, 'someName1', '20', 'someProducer1', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('3', NULL, NULL, 'someName1', '10', 'someProducer2', 'someProvider', '40', '8');
 
 INSERT INTO materials (id, name) VALUES ('1', 'someName');
 

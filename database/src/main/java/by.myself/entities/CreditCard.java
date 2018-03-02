@@ -29,11 +29,4 @@ public class CreditCard extends Payment {
 
     @Column(name = "expire_date", nullable = false)
     private LocalDate expireDate;
-
-    public CreditCard(LocalDateTime time, Wallet wallet, String serialNumber, String cvv, LocalDate expireDate) {
-        super(time, wallet);
-        this.serialNumber = serialNumber;
-        this.cvv = cvv;
-        this.expireDate = expireDate;
-    }
 }

@@ -25,6 +25,4 @@ public class Location {
 
     @Column(name = "address")
     private String address;
-
-
 }

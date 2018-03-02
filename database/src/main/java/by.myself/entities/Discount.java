@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
@@ -18,16 +19,12 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Discount extends BaseEntity {
 
-    @OneToMany(mappedBy = "discount")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "discount")
     private Set<Product> products;
 
-    @Column(name = "discount", nullable = false)
+    @Column(name = "discount", nullable = false, columnDefinition = "DECIMAL")
     private Double discount;
-
-    public Discount(Double discount) {
-        this.discount = discount;
-    }
 }

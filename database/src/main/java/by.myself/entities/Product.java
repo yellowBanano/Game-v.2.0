@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,13 +21,13 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true, exclude = {"image", "discount", "types", "materials", "orders"})
 public class Product extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "cost", nullable = false)
+    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
     private Double cost;
 
     @Column(name = "producer")
@@ -67,19 +68,4 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "product")
     private Set<Order> orders = new HashSet<>();
-
-    public Product(String name, Double cost, Integer size, Integer amount, Image image) {
-        this.name = name;
-        this.cost = cost;
-        this.size = size;
-        this.amount = amount;
-        this.image = image;
-    }
-
-    public Product(String name, Double cost, Integer size, Integer amount) {
-        this.name = name;
-        this.cost = cost;
-        this.size = size;
-        this.amount = amount;
-    }
 }

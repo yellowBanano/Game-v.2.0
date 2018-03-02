@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,16 +18,12 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Image extends BaseEntity {
 
     @Column(name = "link")
     private String link;
 
-    @OneToOne(mappedBy = "image")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "image")
     private Product product;
-
-    public Image(String link) {
-        this.link = link;
-    }
 }

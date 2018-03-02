@@ -20,20 +20,11 @@
       <version>5.2.12.Final</version>
     </dependency>
 
-    <!--Old MySql Connector-->
-
-    <!--<dependency>-->
-      <!--<groupId>mysql</groupId>-->
-      <!--<artifactId>mysql-connector-java</artifactId>-->
-      <!--<version>6.0.6</version>-->
-    <!--</dependency>-->
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency>
-
 
     <dependency>
       <groupId>com.h2database</groupId>
@@ -41,5 +32,13 @@
       <version>1.4.196</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>by.myself</groupId>
+      <artifactId>shop</artifactId>
+      <version>0.1</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 </project>

@@ -19,7 +19,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true, exclude = {"orders", "wallet"})
 public class User extends BaseEntity {
 
     @Column(name = "email", unique = true, nullable = false)
@@ -52,11 +52,4 @@ public class User extends BaseEntity {
 
     @Transient
     private String fullName = firstName + " " + lastName;
-
-    public User(String email, String login, String password, Wallet wallet) {
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.wallet = wallet;
-    }
 }
