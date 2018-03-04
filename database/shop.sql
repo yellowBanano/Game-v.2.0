@@ -123,11 +123,55 @@ INSERT INTO types (id, name) VALUES ('1', 'someName');
 INSERT INTO discounts (id, discount) VALUES ('1', '20');
 
 INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
-VALUES ('1', NULL, NULL, 'someName2', '10', 'someProducer1', 'someProvider', '40', '8');
+VALUES ('1', NULL, NULL, 'someName1', '10', 'someProducer1', 'someProvider', '40', '8');
 INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
-VALUES ('2', NULL, NULL, 'someName1', '20', 'someProducer1', 'someProvider', '40', '8');
+VALUES ('2', NULL, NULL, 'someName2', '20', 'someProducer1', 'someProvider', '40', '8');
 INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
-VALUES ('3', NULL, NULL, 'someName1', '10', 'someProducer2', 'someProvider', '40', '8');
+VALUES ('3', NULL, NULL, 'someName3', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('4', NULL, NULL, 'someName4', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('5', NULL, NULL, 'someName5', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('6', NULL, NULL, 'someName6', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('7', NULL, NULL, 'someName7', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('8', NULL, NULL, 'someName8', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('9', NULL, NULL, 'someName9', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('10', NULL, NULL, 'someName10', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('11', NULL, NULL, 'someName11', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('12', NULL, NULL, 'someName12', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('13', NULL, NULL, 'someName13', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('14', NULL, NULL, 'someName14', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('15', NULL, NULL, 'someName15', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('16', NULL, NULL, 'someName16', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('17', NULL, NULL, 'someName17', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('18', NULL, NULL, 'someName18', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('19', NULL, NULL, 'someName19', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('20', NULL, NULL, 'someName20', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('21', NULL, NULL, 'someName21', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('22', NULL, NULL, 'someName22', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('23', NULL, NULL, 'someName23', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('24', NULL, NULL, 'someName24', '10', 'someProducer2', 'someProvider', '40', '8');
+INSERT INTO products (id, id_image, id_discount, name, cost, producer, provider, size, amount)
+VALUES ('25', NULL, NULL, 'someName25', '10', 'someProducer2', 'someProvider', '40', '8');
 
 INSERT INTO materials (id, name) VALUES ('1', 'someName');
 

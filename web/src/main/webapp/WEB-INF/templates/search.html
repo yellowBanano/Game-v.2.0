@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/search}" method="post" th:object="${products}">
+
+        <!--Input search data-->
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <label for="query" class="input-group-text" th:text="#{name}+' '+#{or}+' '+#{producer}">
+                    Name or Producer
+                </label>
+            </div>
+            <input type="text" name="query" class="form-control" id="query" th:placeholder="#{site.search}"
+                   value="">
+            <div class="input-group-append">
+                <div class="input-group-prepend">
+                    <label for="cost" class="input-group-text" th:text="#{cost}">
+                        Cost
+                    </label>
+                </div>
+                <input type="number" name="cost" class="form-control bfh-number"
+                       th:placeholder="#{cost}" id="cost" value="0" step="0.01" min="0">
+            </div>
+        </div>
+        <!--Limitations-->
+
+        <fieldset>
+            <legend th:text="#{number.results}">Количество результатов</legend>
+            <label for="limit"> <strong th:text="#{limit}">Ограничить:</strong> </label>
+            <input type="number" id="limit" name="limit" value="0" min="0"><br>
+            <label for="offset"> <strong th:text="#{skip}">Пропустить:</strong> </label>
+            <input type="number" id="offset" name="offset" value="0" min="0">
+        </fieldset>
+
+
+        <!--Sorting dropdown-->
+        <fieldset>
+            <legend th:text="#{sorting}">Сортировка</legend>
+            <div class="form-group blu-margin">
+                <select class="form-control" name="sort">
+                    <option disabled th:text="#{select.sorting}">Сортировка</option>
+                    <option th:text="#{sort.by.name.asc}">По названию(возрастание)</option>
+                    <option th:text="#{sort.by.name.desc}">По названию(возрастание)</option>
+                    <option th:text="#{sort.by.cost.asc}">По названию(возрастание)</option>
+                    <option th:text="#{sort.by.cost.desc}">По названию(возрастание)</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!--Options Pagination-->
+        <fieldset class="form-group">
+            <legend th:text="#{result.on.page}">Сколько показать результатов на странице?</legend>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="pagination" value="10" checked th:text="10">
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="pagination" value="30" th:text="30">
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="pagination" value="50" th:text="50">
+                </label>
+            </div>
+        </fieldset>
+
+        <!--Search button-->
+        <p class="text-center">
+            <button class="btn btn-success" type="submit" th:text="#{button.search}">Search</button>
+        </p>
+
+        <!--Product table-->
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" th:text="#{name}">Name</th>
+                <th scope="col" th:text="#{cost}">Cost</th>
+                <th scope="col" th:text="#{producer}">Producer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${pagedListHolder.pageList}">
+                <th scope="row" th:text="${products.indexOf(product)} + 1">id</th>
+                <td th:text="${product.name}">Product name</td>
+                <td th:text="${product.cost}">Product cost</td>
+                <td th:text="${product.producer}">Product producer</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!--Pagination-->
+    <div th:if="${not pagedListHolder.getPageList().isEmpty()}">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center"
+                th:with="currentUrl=(${@currentUrlWithoutParam.apply('page')})">
+                <!--Previous Button-->
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" th:text="#{navigation.previous}">Previous</a>
+                </li>
+                <!--Buttons-->
+                <li class="page-item" th:each="page : ${#numbers.sequence(1, pagedListHolder.pageCount)}">
+                    <a class="page-link" th:href="@{${currentUrl}(page=${page})}" th:text="${page}">page</a>
+                </li>
+                <!--Next Button-->
+                <li th:if="" class="page-item disabled">
+                    <a class="page-link" href="#" th:text="#{navigation.next}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</body>
+</html>
