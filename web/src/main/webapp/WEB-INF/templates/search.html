@@ -104,22 +104,25 @@
         </table>
     </form>
 
+    <!--TODO Add support multi buttons-->
     <!--Pagination-->
     <div th:if="${not pagedListHolder.getPageList().isEmpty()}">
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center"
                 th:with="currentUrl=(${@currentUrlWithoutParam.apply('page')})">
                 <!--Previous Button-->
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" th:text="#{navigation.previous}">Previous</a>
+                <li class="page-item" th:if="${not pagedListHolder.isFirstPage()}">
+                    <a class="page-link" th:href="@{${currentUrl}(page=${pagedListHolder.page})}" tabindex="-1"
+                       th:text="#{navigation.previous}">Previous</a>
                 </li>
                 <!--Buttons-->
                 <li class="page-item" th:each="page : ${#numbers.sequence(1, pagedListHolder.pageCount)}">
                     <a class="page-link" th:href="@{${currentUrl}(page=${page})}" th:text="${page}">page</a>
                 </li>
                 <!--Next Button-->
-                <li th:if="" class="page-item disabled">
-                    <a class="page-link" href="#" th:text="#{navigation.next}">Next</a>
+                <li class="page-item" th:if="${not pagedListHolder.isLastPage()}">
+                    <a class="page-link" th:href="@{${currentUrl}(page=${pagedListHolder.page + 2})}"
+                       th:text="#{navigation.next}">Next</a>
                 </li>
             </ul>
         </nav>

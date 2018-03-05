@@ -30,7 +30,7 @@ public class SearchController {
     public String showSearchPage(@RequestParam("page") Optional<String> page) {
         if (page.isPresent() && !page.get().matches("/D+")) {
             Integer requiredPage = Integer.valueOf(page.get());
-            if (requiredPage <= pagedListHolder.getPageCount()) {
+            if (requiredPage <= pagedListHolder.getPageCount() && requiredPage > 0) {
                 pagedListHolder.setPage(requiredPage - 1);
             }
         }
