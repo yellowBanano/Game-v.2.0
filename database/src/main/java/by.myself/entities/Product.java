@@ -1,6 +1,10 @@
 package by.myself.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
+import javax.persistence.Version;
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,4 +73,8 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "product")
     private Set<Order> orders = new HashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 }

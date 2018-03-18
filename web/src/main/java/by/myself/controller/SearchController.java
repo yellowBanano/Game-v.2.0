@@ -48,14 +48,14 @@ public class SearchController {
     }
 
     @PostMapping("/search")
-    public String showRequiredProducts(String query, Double cost, String pagination) {
+    public String showRequiredProducts(String query, Double cost, String pagination, Integer limit) {
         if (query.matches(" +") && cost == 0d) {
             return "redirect:/search";
         }
         if (!viewProducts.isEmpty()) {
             viewProducts.clear();
         }
-        viewProducts = productService.searchProducts(query, cost);
+        viewProducts = productService.searchProducts(query, cost, limit);
         pagedListHolder.setSource(viewProducts);
         pagedListHolder.setPageSize(Integer.valueOf(pagination));
         return "redirect:/search";

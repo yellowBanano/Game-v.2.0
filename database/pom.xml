@@ -17,7 +17,13 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.2.12.Final</version>
+      <version>${hibernate-core.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-ehcache</artifactId>
+      <version>${hibernate-ehcache.version}</version>
     </dependency>
 
     <dependency>
@@ -32,13 +38,9 @@
       <version>1.4.196</version>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>by.myself</groupId>
-      <artifactId>shop</artifactId>
-      <version>0.1</version>
-      <scope>test</scope>
-    </dependency>
-
   </dependencies>
+  <properties>
+    <hibernate-ehcache.version>5.2.12.Final</hibernate-ehcache.version>
+    <hibernate-core.version>5.2.12.Final</hibernate-core.version>
+  </properties>
 </project>

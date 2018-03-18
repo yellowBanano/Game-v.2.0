@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "my-cache")
 public class Shop extends BaseEntity {
 
     @Column(name = "phone_number")

@@ -1,15 +1,18 @@
 package by.myself.service;
 
+import by.myself.annotation.Loggable;
 import by.myself.entities.Product;
 import by.myself.model.ProductModel;
-import by.myself.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
+@Transactional
+@Loggable
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -20,14 +23,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductModel> searchProducts(String query, Double cost) {
+    public List<ProductModel> searchProducts(String query, Double cost, Integer limit) {
         List<Product> foundProducts;
-        if (cost == 0d) {
-            foundProducts = productRepository.findAllByNameOrProducerOrCost(query, query, null);
-        } else if (query.matches(" +")) {
-            foundProducts = productRepository.findAllByNameOrProducerOrCost(null, null, cost);
+        if (limit == 0) {
+            foundProducts = productRepository.findAllByNameOrProducerOrCostOrderByName(query, query, cost);
+        } else if (limit == 25) {
+            foundProducts = productRepository.findTop25ByNameOrProducerOrCostOrderByName(query, query, cost);
+        } else if (limit == 50) {
+            foundProducts = productRepository.findTop50ByNameOrProducerOrCostOrderByName(query, query, cost);
         } else {
-            foundProducts = productRepository.findAllByNameOrProducerOrCost(query, query, cost);
+            foundProducts = productRepository.findTop100ByNameOrProducerOrCostOrderByName(query, query, cost);
         }
         return convertEntityToModel(foundProducts);
     }
@@ -35,7 +40,10 @@ public class ProductServiceImpl implements ProductService {
     private List<ProductModel> convertEntityToModel(List<Product> products) {
         List<ProductModel> convertedProducts = new ArrayList<>();
         if (products != null && !products.isEmpty()) {
-            products.forEach(product -> convertedProducts.add(new ProductModel(product.getName(), product.getCost(), product.getProducer())));
+            products.forEach(product -> {
+                ProductModel productModel = new ProductModel(product.getName(), product.getCost(), product.getProducer());
+                convertedProducts.add(productModel);
+            });
         }
         return convertedProducts;
     }

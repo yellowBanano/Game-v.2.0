@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+  <title th:text="${httpStatus}">Error page</title>
+  <meta charset="utf-8"/>
+  <style type="text/css">
+    .error-background {
+      margin: auto;
+      height: 640px; /* Высота блока */
+      width: 960px; /* Ширина блока */
+      background: url(https://s14.stc.all.kpcdn.net/share/i/12/9959290/inx960x640.jpg) no-repeat;
+    }
+  </style>
+</head>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+
+<div style="text-align: center;">
+  <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
+  <h1>Oops!</h1>
+  <h1>This page either does not exist or has mysteriously disappeared.</h1>
+  <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+</div>
+<div class="error-background"></div>
+</body>
+</html>

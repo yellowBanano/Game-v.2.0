@@ -13,12 +13,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "by.myself.repository")
+@EnableJpaRepositories(basePackages = "by.myself.service")
 public class PersistenceConfig {
 
     @Value("${jdbc.driver}")
@@ -44,6 +45,12 @@ public class PersistenceConfig {
 
     @Value("${hibernate.creation_policy}")
     private String creationPolicy;
+
+    @Value("${hibernate.second-level-cache-factory}")
+    private String cacheFactory;
+
+    @Value("${hibernate.use-second-level-cache}")
+    private String useCache;
 
     @Bean
     public DataSource dataSource() {
@@ -75,6 +82,10 @@ public class PersistenceConfig {
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.format_sql", formatSql);
         properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
+        properties.setProperty("hibernate.cache.region.factory_class", cacheFactory);
+        properties.setProperty("cache.use_second_level_cache", useCache);
+        properties.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_REPEATABLE_READ));
+
         return properties;
     }
 
