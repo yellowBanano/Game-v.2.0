@@ -1,0 +1,65 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
+  <link rel="stylesheet" href="/resources/css/chat.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<div class="chat-box">
+
+  <h2 th:text="#{forum.topic.title}">Topic</h2>
+  <div class="container">
+    <p th:text="${topic.text}">Some Text</p>
+    <form th:action="@{/forum/topic/edit}" method="post" th:object="${topic}">
+      <textarea name="comments" placeholder="Do It!" th:field="*{text}"
+              style="font-family:sans-serif;font-size:1.2em;">
+      </textarea>
+      <button type="submit" th:text="#{forum.button.comment}"></button>
+    </form>
+  </div>
+
+  <h2 th:text="#{forum.chat.messages}">Chat Messages</h2>
+  <div class="container" th:classappend="${commentList.indexOf(postedComment)}%2==0?'':'darker'"
+       th:each="postedComment : ${commentList}">
+    <img th:classappend="${commentList.indexOf(postedComment)}%2==0?'':'right'"
+         th:src="@{|~/resources/images/users/${postedComment.user.username}.jpg|}" alt="Avatar" style="width: 100%">
+    <p th:text="${postedComment.text}">Some Text</p>
+    <span class="time-right" th:classappend="${commentList.indexOf(postedComment)}%2==0?'time-right':'time-left'"
+          th:text="${#temporals.format(postedComment.dateTime, 'dd.MM.yyyy HH:mm')}">11:11:11</span>
+  </div>
+
+  <form th:action="@{/forum/topic}" method="post" th:object="${comment}">
+    <div>
+    <textarea name="comments" id="comments" placeholder="Join to Party!" th:field="*{text}"
+              style="font-family:sans-serif;font-size:1.2em;">
+    </textarea>
+    </div>
+    <button type="submit" th:text="#{forum.button.comment}"></button>
+  </form>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

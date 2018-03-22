@@ -67,6 +67,7 @@ CREATE TABLE roles (
 CREATE TABLE users (
   id           BIGINT AUTO_INCREMENT,
   id_wallet    BIGINT       NOT NULL UNIQUE,
+  id_role      BIGINT       NOT NULL,
   email        VARCHAR(50)  NOT NULL UNIQUE,
   username     VARCHAR(30)  NOT NULL UNIQUE,
   password     VARCHAR(100) NOT NULL,
@@ -77,7 +78,23 @@ CREATE TABLE users (
   city         VARCHAR(30),
   address      VARCHAR(30),
   PRIMARY KEY (id),
-  FOREIGN KEY (id_wallet) REFERENCES wallets (id)
+  FOREIGN KEY (id_wallet) REFERENCES wallets (id),
+  FOREIGN KEY (id_role) REFERENCES roles (id)
+);
+CREATE TABLE comments (
+  id               BIGINT AUTO_INCREMENT,
+  id_user          BIGINT       NOT NULL,
+  datetime_comment DATETIME     NOT NULL,
+  text             VARCHAR(500) NOT NULL,
+  version          BIGINT       NOT NULL UNIQUE,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_user) REFERENCES users (id)
+);
+CREATE TABLE topics (
+  id             BIGINT AUTO_INCREMENT,
+  datetime_topic DATETIME     NOT NULL,
+  text           VARCHAR(300) NOT NULL,
+  PRIMARY KEY (id)
 );
 CREATE TABLE orders (
   id             BIGINT AUTO_INCREMENT,
@@ -100,13 +117,6 @@ CREATE TABLE shops (
 );
 
 # CONNECTORS
-CREATE TABLE user_role (
-  id_user BIGINT NOT NULL,
-  id_role BIGINT NOT NULL,
-  PRIMARY KEY (id_user, id_role),
-  FOREIGN KEY (id_user) REFERENCES users (id),
-  FOREIGN KEY (id_role) REFERENCES roles (id)
-);
 CREATE TABLE product_material (
   id_product  BIGINT NOT NULL,
   id_material BIGINT NOT NULL,
@@ -225,19 +235,17 @@ VALUES ('43', NULL, NULL, 'someName43', 1, '10', 'someProducer2', 'someProvider'
 
 INSERT INTO materials (id, name) VALUES ('1', 'someName');
 
-INSERT INTO roles (id, name) VALUES ('1', 'ADMIN');
-INSERT INTO roles (id, name) VALUES ('2', 'USER');
+INSERT INTO roles (id, name) VALUES ('2', 'ADMIN');
+INSERT INTO roles (id, name) VALUES ('1', 'USER');
 
-INSERT INTO users (id, id_wallet, email, username, password, first_name, last_name, phone_number, country, city, address)
+INSERT INTO users (id, id_wallet, id_role, email, username, password, first_name, last_name, phone_number, country, city, address)
 VALUES
-  ('1', '1', 'someEmail', 'someUsername', 'somePassword', 'firstName', 'lastName', '103', 'someCountry', 'someCity',
+  ('1', '1', '1', 'someEmail', 'someUsername', 'somePassword', 'firstName', 'lastName', '103', 'someCountry',
+        'someCity',
+   'someAddress');
+INSERT INTO users (id, id_wallet, id_role, email, username, password, first_name, last_name, phone_number, country, city, address)
+VALUES ('2', '2', '2', 'admin@mail.ru', 'admin', 'admin', 'firstName', 'lastName', '103', 'someCountry', 'someCity',
         'someAddress');
-INSERT INTO users (id, id_wallet, email, username, password, first_name, last_name, phone_number, country, city, address)
-VALUES ('2', '2', 'admin@mail.ru', 'admin', 'admin', 'firstName', 'lastName', '103', 'someCountry', 'someCity',
-             'someAddress');
-
-INSERT INTO user_role (id_user, id_role) VALUES ('2', '1');
-INSERT INTO user_role (id_user, id_role) VALUES ('1', '2');
 
 INSERT INTO orders (id, id_product, id_consumer, datetime_order, paid, delivered)
 VALUES ('1', '1', '1', '2000-11-10 10:20:10', 0, 0);

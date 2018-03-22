@@ -46,11 +46,17 @@ public class PersistenceConfig {
     @Value("${hibernate.creation_policy}")
     private String creationPolicy;
 
-    @Value("${hibernate.second-level-cache-factory}")
+    @Value("${hibernate.second_level_cache_factory}")
     private String cacheFactory;
 
-    @Value("${hibernate.use-second-level-cache}")
+    @Value("${hibernate.use_second_level_cache}")
     private String useCache;
+
+    @Value("${hibernate.use_query_cache}")
+    private String useQueryCache;
+
+    @Value("${hibernate.net.sf.ehcache.configurationResourceName}")
+    private String configCacheResource;
 
     @Bean
     public DataSource dataSource() {
@@ -84,6 +90,8 @@ public class PersistenceConfig {
         properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
         properties.setProperty("hibernate.cache.region.factory_class", cacheFactory);
         properties.setProperty("cache.use_second_level_cache", useCache);
+        properties.setProperty("cache.use_query_cache", useQueryCache);
+        properties.setProperty("net.sf.ehcache.configurationResourceName", configCacheResource);
         properties.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_REPEATABLE_READ));
 
         return properties;

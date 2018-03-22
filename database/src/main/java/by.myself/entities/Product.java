@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"image", "discount", "types", "materials", "orders"})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "my-cache")
 public class Product extends BaseEntity {
 
     @Column(name = "name", nullable = false)

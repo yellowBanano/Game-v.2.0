@@ -1,5 +1,5 @@
 package by.myself.model;
 
-public enum Role {
+public enum RoleEnum {
     USER, ADMIN;
 }

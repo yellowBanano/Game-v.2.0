@@ -41,6 +41,18 @@ body {
     float: right;
 }
 
+.delimiter {
+    font-size: 20px;
+    margin: 5px 5px;
+}
+
+.account_icon {
+    font-size: 23px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
 @media screen and (max-width: 500px) {
     .header a {
         float: none;

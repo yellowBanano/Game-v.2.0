@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacts</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<div class="container">
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-body">
+        <div class="col-md-12">
+          <div class="panel panel-warning">
+            <div class="panel-body">
+              <h2 th:text="#{contact.shop.title}"></h2>
+              <div th:each="shop : ${shopList}">
+                <br>
+                <h3 th:text="#{contact.shop.address}"></h3>
+                <strong th:text="${shop.location.country}"></strong>
+                <strong th:text="${shop.location.city}"></strong>
+                <strong th:text="${shop.location.address}"></strong>
+                <h3 th:text="#{contact.shop.phone}"></h3>
+                <strong th:text="${shop.phoneNumber}"></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -14,8 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,8 +27,8 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = {"orders", "wallet", "roles"})
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "my-cache")
+@ToString(callSuper = true, exclude = {"orders", "wallet"})
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "my-cache")
 public class User extends BaseEntity {
 
     @Column(name = "email", unique = true, nullable = false)
@@ -50,19 +49,18 @@ public class User extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(cascade={javax.persistence.CascadeType.REMOVE}, orphanRemoval=true)
     @JoinColumn(name = "id_wallet", nullable = false, unique = true)
     private Wallet wallet;
 
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_role"))
-    @ManyToMany
-    private Set<Role> roles = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
 
     @Embedded
     private Location location;
 
-    @OneToMany(mappedBy = "consumer")
+    @OneToMany(cascade={javax.persistence.CascadeType.REMOVE}, orphanRemoval=true, mappedBy = "consumer")
+    @Cascade(CascadeType.DELETE)
     private Set<Order> orders = new HashSet<>();
 }

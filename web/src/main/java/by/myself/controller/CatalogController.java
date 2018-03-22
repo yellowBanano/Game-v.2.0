@@ -15,18 +15,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class SearchController {
+public class CatalogController {
 
     private List<ProductModel> viewProducts = new ArrayList<>();
     private final ProductService productService;
     private PagedListHolder<ProductModel> pagedListHolder = new PagedListHolder<>(viewProducts);
 
     @Autowired
-    public SearchController(ProductService productService) {
+    public CatalogController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/search")
+    @GetMapping("/catalog")
     public String showSearchPage(@RequestParam("page") Optional<String> page) {
         if (page.isPresent() && !page.get().matches("/D+")) {
             Integer requiredPage = Integer.valueOf(page.get());
@@ -34,7 +34,7 @@ public class SearchController {
                 pagedListHolder.setPage(requiredPage - 1);
             }
         }
-        return "search";
+        return "catalog";
     }
 
     @ModelAttribute("products")
@@ -47,10 +47,10 @@ public class SearchController {
         return pagedListHolder;
     }
 
-    @PostMapping("/search")
+    @PostMapping("/catalog")
     public String showRequiredProducts(String query, Double cost, String pagination, Integer limit) {
         if (query.matches(" +") && cost == 0d) {
-            return "redirect:/search";
+            return "redirect:/catalog";
         }
         if (!viewProducts.isEmpty()) {
             viewProducts.clear();
@@ -58,6 +58,6 @@ public class SearchController {
         viewProducts = productService.searchProducts(query, cost, limit);
         pagedListHolder.setSource(viewProducts);
         pagedListHolder.setPageSize(Integer.valueOf(pagination));
-        return "redirect:/search";
+        return "redirect:/catalog";
     }
 }

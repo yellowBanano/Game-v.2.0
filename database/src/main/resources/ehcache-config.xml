@@ -4,6 +4,7 @@
 
   <defaultCache maxEntriesLocalHeap="10000"
                 timeToIdleSeconds="120" timeToLiveSeconds="120" diskSpoolBufferSizeMB="30"
+                eternal="false"
                 maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120"
                 memoryStoreEvictionPolicy="LRU" statistics="true">
     <persistence strategy="localTempSwap"/>
@@ -11,6 +12,7 @@
 
   <cache name="my-cache"
          maxElementsInMemory="500"
+         eternal="false"
          timeToIdleSeconds="30"
          timeToLiveSeconds="60"/>
 </ehcache>

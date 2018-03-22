@@ -11,8 +11,12 @@
       background: url(https://s14.stc.all.kpcdn.net/share/i/12/9959290/inx960x640.jpg) no-repeat;
     }
   </style>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
 </head>
 <body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
 
 <div style="text-align: center;">
   <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
@@ -21,5 +25,8 @@
   <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 </div>
 <div class="error-background"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

@@ -1,12 +1,10 @@
 package by.myself.aspects;
 
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 

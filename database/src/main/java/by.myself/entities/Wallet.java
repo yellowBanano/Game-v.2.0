@@ -28,6 +28,6 @@ public class Wallet extends BaseEntity {
     @Column(name = "amount", columnDefinition = "BIGINT")
     private Double amount;
 
-    @OneToMany(mappedBy = "wallet")
+    @OneToMany(cascade={javax.persistence.CascadeType.REMOVE}, orphanRemoval=true, mappedBy = "wallet")
     private Set<Payment> payments;
 }

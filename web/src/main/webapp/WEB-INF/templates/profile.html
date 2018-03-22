@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+
+  <script src="/resources/js/jquery-3.2.1.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
+  <link rel="stylesheet" href="/resources/css/registration.css">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<div class="container">
+  <table class="table">
+    <tr>
+      <td>
+        <img th:src="@{|~/resources/images/users/${user.username}.jpg|}" alt="Avatar">
+        <!--<input type="file" accept="image/vnd.sealedmedia.softseal-jpg">-->
+      </td>
+      <td>
+        <p th:text="#{registration.user.email}+': '+${user.email}"></p>
+        <p th:text="#{registration.user.username}+': '+${user.username}"></p>
+        <p th:text="#{registration.user.firstname}+': '+${user.firstName}"></p>
+        <p th:text="#{registration.user.lastname}+': '+${user.lastName}"></p>
+        <p th:text="#{registration.user.phonenumber}+': '+${user.phoneNumber}"></p>
+        <a class="btn btn-default"
+           th:href="@{'/update/profile'}"
+           role="button" th:text="#{user.button.update}">Update</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

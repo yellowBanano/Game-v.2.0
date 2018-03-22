@@ -9,15 +9,18 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class RegistrationController {
 
-    private final UserService userService;
+    private UserService userService;
+
+    @ModelAttribute
+    public UserModel user() {
+        return new UserModel();
+    }
 
     @Autowired
     public RegistrationController(UserService userService) {
@@ -25,22 +28,16 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String showRegistrationForm(@RequestParam("page") Optional<String> language) {
-        return "registration";
-    }
-
-    @ModelAttribute("userModel")
-    public UserModel userModel() {
-        return new UserModel();
+    public String redirectToLogin() {
+        return "redirect:/login";
     }
 
     @PostMapping("/registration")
-    public String workWithUserData(@Valid UserModel userModel, Errors errors) {
+    public String registration(UserModel user) {
         try {
-            userService.registerNewUserAccount(userModel);
+            userService.registerNewUserAccount(user);
         } catch (AccountExistsException e) {
             e.printStackTrace();
-//            errors.add("accountExists");
         }
         return "registration";
     }

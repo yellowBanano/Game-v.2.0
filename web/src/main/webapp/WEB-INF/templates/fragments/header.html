@@ -1,33 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" media="screen"
         id="bootstrap-css">
+  <link rel="stylesheet" href="/resources/css/header.css">
 </head>
 <body>
 <div class="header" th:fragment="header" th:with="currentUrl=(${@currentUrlWithoutParam.apply('language')})">
 
-  <a th:href="@{/search}" class="logo">CompanyLogo</a>
-  <a th:classappend="${#httpServletRequest.getRequestURI() == '/search' ? 'active' : ''}"
-     th:href="@{/search}" th:text="#{header.catalog}">Catalog</a>
+  <a th:href="@{/catalog}" class="logo">CompanyLogo</a>
+
+  <a th:classappend="${#httpServletRequest.getRequestURI() == '/catalog' ? 'active' : ''}"
+     th:href="@{/catalog}" th:text="#{header.catalog}">Catalog</a>
+
+  <a th:classappend="${#httpServletRequest.getRequestURI() == '/forum/topic' ? 'active' : ''}"
+     th:href="@{/forum/topic}" th:text="#{header.forum}">Forum</a>
+
+  <a th:classappend="${#httpServletRequest.getRequestURI() == '/contact/shop' ? 'active' : ''}"
+     th:href="@{/contact/shop}" th:text="#{header.shops}">Forum</a>
+
+  <a th:classappend="${#httpServletRequest.getRequestURI() == '/converter' ? 'active' : ''}"
+     th:href="@{/converter}" th:text="#{header.converter}">Forum</a>
+
   <div class="header-right">
+
     <a th:href="@{${currentUrl}(language='en_US')}">
       <img border="0" alt="ENG"
            src="http://icons.iconarchive.com/icons/custom-icon-design/all-country-flag/256/United-Kingdom-flag-icon.png"
            width="30"
            height="30">
     </a>
+
     <a th:href="@{${currentUrl}(language='ru_RU')}">
       <img border="0" alt="RUS"
            src="http://icons.iconarchive.com/icons/custom-icon-design/flag-3/256/Russia-Flag-icon.png"
            width="30"
            height="30">
     </a>
-    <!--<a th:href="${}">Contact</a>-->
-    <!--<a href="#about">About</a>-->
-    <a th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active' : ''}"
-       th:href="@{/registration}" th:text="#{header.sign}">Sign in/out</a>
+
+    <span sec:authorize="isAuthenticated()"
+          th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active' : ''}">
+      <span class="account_icon">
+        <a th:href="@{/profile}" th:text="#{header.profile}"></a>
+      </span>
+      <span sec:authentication="name"></span>
+    </span>
+
+    <span sec:authorize="is">
+      <form hidden id="logout" th:action="@{/logout}" method="post"></form>
+      <a class="logout" onclick="logout.submit();" th:text="#{header.logout}"></a>
+    </span>
+
+    <span sec:authorize="isAnonymous()">
+      <a th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active' : ''}" th:href="@{/login}"
+         th:text="#{header.sign}"></a>
+    </span>
+
   </div>
 </div>
 

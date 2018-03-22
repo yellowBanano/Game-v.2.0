@@ -13,6 +13,7 @@
   <script src="/resources/js/registration.js"></script>
   <link rel="stylesheet" href="/resources/css/registration.css">
   <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
 <div th:replace="fragments/header :: header">&nbsp;</div>
@@ -235,7 +236,7 @@
   </div>
 </div>
 
-<div th:replace="fragments/footer :: footer"></div>
+<div th:insert="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

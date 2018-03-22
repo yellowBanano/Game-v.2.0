@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "my-cache")
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "my-cache")
 public class Shop extends BaseEntity {
 
     @Column(name = "phone_number")

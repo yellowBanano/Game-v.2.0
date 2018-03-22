@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
+
+</head>
+<body>
+<div class="wrapper">
+
+  <div th:replace="fragments/header :: header">&nbsp;</div>
+
+  <div class="content">
+
+  </div>
+
+  <div class="container">
+
+    <div class="col-md-12">
+      <div class="panel  panel-warning">
+        <div class="panel-heading" th:text="#{update.user.heading}">ПОЛЬЗОВАТЕЛИ</div>
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div class="panel  panel-warning">
+              <div class="panel-body">
+                <form th:action="@{/admin/users/update}" method="post" th:object="${user}">
+                  <table class="table">
+                    <tr>
+                      <th>Id</th>
+                      <th th:text="#{registration.user.email}">E-mail</th>
+                      <th th:text="#{registration.user.username}">Username</th>
+                      <th th:text="#{registration.user.password}">Password</th>
+                      <th th:text="#{update.user.role}">Role</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td th:text="${user.id}"></td>
+                      <td th:text="${user.email}"></td>
+                      <td th:text="${user.username}"></td>
+                      <td th:text="${user.password}"></td>
+                      <td th:text="${#strings.capitalize(#strings.toLowerCase(user.role.name))}"></td>
+                      <td><a class="btn btn-default" th:href="@{/admin/users}"
+                             role="button" th:text="#{user.button.create}">Отмена</a></td>
+                    </tr>
+                    <tr>
+                      <td><input th:field="*{id}" th:value="${user.id}" hidden></td>
+                      <td><input class="form-control" type="text" th:placeholder="#{registration.user.email}"
+                                 th:field="*{email}" required></td>
+                      <td><input class="form-control" type="text" th:placeholder="#{registration.user.username}"
+                                 th:field="*{username}" required></td>
+                      <td><input class="form-control" type="password" th:placeholder="#{registration.user.password}"
+                                 th:field="*{password}" required></td>
+                      <td>
+                        <select class="form-control" name="roleId">
+                          <option th:each="role : ${roles}" th:text="${role.name}"
+                                  th:value="${role.id}"></option>
+                        </select>
+                      </td>
+                      <td>
+                        <button class="btn btn-success" type="submit" th:text="#{user.button.update}">Обновить</button>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

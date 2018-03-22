@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+        auth.authenticationProvider(authProvider());
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,27 +48,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
+
         http
                 .authorizeRequests()
-                    .antMatchers("/admin/**")
-                        .hasAuthority("ADMIN")
+                .antMatchers("/resources/**")
+                .permitAll()
+                .antMatchers("/catalog", "/converter", "/contact/shop", "/shops", "/login", "/registration")
+                .permitAll()
+                .antMatchers("/admin/**")
+                .hasAuthority("ADMIN")
                 .anyRequest()
-                    .permitAll()
+                .authenticated()
+
                 .and()
                 .formLogin()
-                    .loginPage("/registration")
-                    .defaultSuccessUrl("/search", true)
-                    .permitAll()
-                    .failureUrl("/registration")
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/catalog")
+
                 .and()
                 .logout()
-                    .permitAll()
-                    .and()
-                    .logout()
-                    .logoutUrl("/logout")//POST!
-                .and()
-                   .userDetailsService(userDetailsService);
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
 
+                http.userDetailsService(userDetailsService);
     }
 
     @Bean(name = "authenticationManager")

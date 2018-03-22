@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Converter</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="stylesheet" href="/resources/css/footer.css">
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<div class="container">
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-body">
+        <div class="col-md-12">
+          <div class="panel panel-warning">
+            <div class="panel-body">
+              <h2 th:text="#{converter.title}"></h2>
+              <br>
+
+              <input type="text" id="BYN" size="10" value="0" oninput="bynfunc()" onchange="bynfunc()"/>
+              <label for="BYN" th:text="#{converter.byn}"> BYN </label>
+
+              </br>
+
+              <input type="text" id="RUB" size="10" value="0" oninput="rubfunc()" onchange="rubfunc()" />
+              <label for="RUB" th:text="#{converter.rub}"> RUB </label>
+
+              </br>
+
+              <input type="text" id="EUR" size="10" value="0" oninput="eurfunc()" onchange="eurfunc()" />
+              <label for="EUR" th:text="#{converter.dollar}"> EUR </label>
+
+              </br>
+
+              <input type="text" id="USD" size="10" value="0" oninput="usdfunc()" onchange="usdfunc()" />
+              <label for="USD" th:text="#{converter.euro}"> USD </label>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<script>
+  var byn, usd, eur, rub;
+  function init()
+  {
+    byn = document.getElementById("BYN");
+    usd = document.getElementById("USD");
+    eur = document.getElementById("EUR");
+    rub = document.getElementById("RUB");
+  }
+
+  function bynfunc()
+  {
+    usd.value = parseFloat(byn.value) / 0.41;
+    eur.value = parseFloat(byn.value) / 0.51;
+    rub.value = parseFloat(byn.value) * 29.33;
+  }
+
+  function eurfunc()
+  {
+    byn.value = parseFloat(eur.value) / 2.42;
+    usd.value = parseFloat(eur.value) / 1.23;
+    rub.value = parseFloat(eur.value) * 70.95;
+  }
+
+  function rubfunc()
+  {
+    byn.value = parseFloat(rub.value) * 0.0341;
+    usd.value = parseFloat(rub.value) * 0.0173;
+    eur.value = parseFloat(rub.value) * 0.0141;
+  }
+
+  function usdfunc()
+  {
+    byn.value = parseFloat(usd.value) / 1.96;
+    eur.value = parseFloat(usd.value) / 0.81;
+    rub.value = parseFloat(usd.value) * 57.48;
+  }
+
+  init();
+</script>
+
+</body>
+</html>
